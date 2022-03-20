@@ -1,8 +1,33 @@
 import React from 'react'
+import { Card } from './components/Card'
+
+import { useState, useEffect, useCallback } from 'react'
+import { getAdvice } from './api/advice'
 
 const App = () => {
+  const [text, setText] = useState({})
+  const [loading, SetLoading] = useState(true)
+
+  const advice = useCallback(
+    async () => {
+      SetLoading(true)
+      setText({})
+      setText(await getAdvice())
+      SetLoading(false)
+    },
+    [text],
+  )
+
+
+
+  useEffect(() => {
+    advice()
+  }, [])
+
   return (
-    <div>App</div>
+    <div className='container'>
+      <Card advice={text} loading={loading} getAdvices={advice} />
+    </div>
   )
 }
 
