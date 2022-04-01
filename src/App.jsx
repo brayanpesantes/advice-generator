@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Card } from './components/Card'
 
-import { useState, useEffect, useCallback } from 'react'
 import { getAdvice } from './api/advice'
 
 const App = () => {
@@ -15,10 +14,8 @@ const App = () => {
       setText(await getAdvice())
       SetLoading(false)
     },
-    [text],
+    [text]
   )
-
-
 
   useEffect(() => {
     advice()
